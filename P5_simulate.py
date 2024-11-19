@@ -21,6 +21,7 @@ def get_distances(positions):
 
     return distances
 
+
 # Credit to Inwernos on Stack Overflow for the following code
 # Link: https://stackoverflow.com/questions/65987790/how-to-translate-camera-in-pybullet
 def move_camera():
@@ -29,32 +30,37 @@ def move_camera():
 
     #Keys to change camera
     if keys.get(100):  #D
-       xyz = cam[11]
-       x= float(xyz[0]) + 0.125
-       y = xyz[1]
-       z = xyz[2]
-       p.resetDebugVisualizerCamera(cameraYaw = cam[8], cameraPitch= cam[9],cameraDistance = cam[10],cameraTargetPosition=[x,y,z])
-    if keys.get(97):   #Ad
-       xyz = cam[11]
-       x= float(xyz[0]) - 0.125
-       y = xyz[1]
-       z = xyz[2]
-       p.resetDebugVisualizerCamera(cameraYaw = cam[8], cameraPitch= cam[9],cameraDistance = cam[10],cameraTargetPosition=[x,y,z])
-    if keys.get(99):   #C
-       xyz = cam[11]
-       x = xyz[0]
-       y = float(xyz[1]) + 0.125
-       z = xyz[2]
-       p.resetDebugVisualizerCamera(cameraYaw = cam[8], cameraPitch= cam[9],cameraDistance = cam[10],cameraTargetPosition=[x,y,z])
+        xyz = cam[11]
+        x = float(xyz[0]) + 0.125
+        y = xyz[1]
+        z = xyz[2]
+        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
+                                     cameraTargetPosition=[x, y, z])
+    if keys.get(97):  #Ad
+        xyz = cam[11]
+        x = float(xyz[0]) - 0.125
+        y = xyz[1]
+        z = xyz[2]
+        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
+                                     cameraTargetPosition=[x, y, z])
+    if keys.get(99):  #C
+        xyz = cam[11]
+        x = xyz[0]
+        y = float(xyz[1]) + 0.125
+        z = xyz[2]
+        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
+                                     cameraTargetPosition=[x, y, z])
     if keys.get(102):  #F
-       xyz = cam[11]
-       x = xyz[0]
-       y = float(xyz[1]) - 0.125
-       z = xyz[2]
-       p.resetDebugVisualizerCamera(cameraYaw = cam[8], cameraPitch= cam[9],cameraDistance = cam[10],cameraTargetPosition=[x,y,z])
+        xyz = cam[11]
+        x = xyz[0]
+        y = float(xyz[1]) - 0.125
+        z = xyz[2]
+        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
+                                     cameraTargetPosition=[x, y, z])
+
 
 physicsClient = p.connect(p.GUI)
-p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
+p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 p.setGravity(0, 0, -9.8)
@@ -71,22 +77,22 @@ ps.Prepare_To_Simulate(robotId_2)
 ps.Prepare_To_Simulate(robotId_3)
 
 x = np.linspace(0, 0.003 * duration * np.pi, duration)
-y_14 = np.sin(x)*np.pi/4
-y_23 = np.cos(x)*np.pi/4
+y_14 = np.sin(x) * np.pi / 4
+y_23 = np.cos(x) * np.pi / 4
 
-y2_14 = np.sin(x)*np.pi/2
-y2_23 = np.cos(x)*np.pi/2
+y2_14 = np.sin(x) * np.pi / 2
+y2_23 = np.cos(x) * np.pi / 2
 
 body1_pos = [None] * (duration)
 body2_pos = [None] * (duration)
 body3_pos = [None] * (duration)
 
 for i in range(duration):
-    ps.Set_Motor_For_Joint(bodyIndex = robotId_1,
-                           jointName = b'Body_Leg1',
-                           controlMode = p.POSITION_CONTROL,
-                           targetPosition = y_14[i],
-                           maxForce = 500)
+    ps.Set_Motor_For_Joint(bodyIndex=robotId_1,
+                           jointName=b'Body_Leg1',
+                           controlMode=p.POSITION_CONTROL,
+                           targetPosition=y_14[i],
+                           maxForce=500)
 
     ps.Set_Motor_For_Joint(bodyIndex=robotId_1,
                            jointName=b'Body_Leg2',
@@ -161,7 +167,7 @@ for i in range(duration):
     body2_pos[i] = p.getBasePositionAndOrientation(robotId_2)[0]
     body3_pos[i] = p.getBasePositionAndOrientation(robotId_3)[0]
 
-    time.sleep(1/500)
+    time.sleep(1 / 500)
 
 p.disconnect()
 
