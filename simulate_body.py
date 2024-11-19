@@ -55,7 +55,22 @@ def move_camera():
                                      cameraTargetPosition=[x, y, z])
 
 
-def simulate_body(body:str, duration = 10000):
+def get_distances(positions):
+    distances = [None] * len(positions)
+
+    for i in range(len(positions)):
+        position = positions[i]
+
+        distance = math.sqrt((positions[0][0] - position[0]) ** 2 +
+                             (positions[0][1] - position[1]) ** 2 +
+                             (positions[0][2] - position[2]) ** 2)
+
+        distances[i] = distance
+
+    return distances
+
+
+def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offset=(0, 0, 0, 0)):
     # Configuration
     p.connect(p.GUI)
     p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
@@ -64,14 +79,60 @@ def simulate_body(body:str, duration = 10000):
 
     # Load plane and robot body
     p.loadURDF("plane.urdf")
-    robot_ID = p.loadURDF(body)
+    robot_id = p.loadURDF(body)
 
     # Prepare body for simulation
-    ps.Prepare_To_Simulate(robot_ID)
+    ps.Prepare_To_Simulate(robot_id)
+    body_pos = [None] * duration
+
+    # Prepare driver functions for motors
+    x = np.linspace(0, 0.003 * duration * np.pi, duration)
+    y_1 = amplitude[0] * np.sin(x + phase_offset[0])
+    y_2 = amplitude[1] * np.cos(x + phase_offset[1])
+    y_3 = amplitude[2] * np.cos(x + phase_offset[2])
+    y_4 = amplitude[3] * np.sin(x + phase_offset[3])
 
     for i in range(duration):
+        ps.Set_Motor_For_Joint(bodyIndex=robot_id,
+                               jointName=b'Body_Leg1',
+                               controlMode=p.POSITION_CONTROL,
+                               targetPosition=y_1[i],
+                               maxForce=500)
+
+        ps.Set_Motor_For_Joint(bodyIndex=robot_id,
+                               jointName=b'Body_Leg2',
+                               controlMode=p.POSITION_CONTROL,
+                               targetPosition=y_2[i],
+                               maxForce=500)
+
+        ps.Set_Motor_For_Joint(bodyIndex=robot_id,
+                               jointName=b'Body_Leg3',
+                               controlMode=p.POSITION_CONTROL,
+                               targetPosition=y_3[i],
+                               maxForce=500)
+
+        ps.Set_Motor_For_Joint(bodyIndex=robot_id,
+                               jointName=b'Body_Leg4',
+                               controlMode=p.POSITION_CONTROL,
+                               targetPosition=y_4[i],
+                               maxForce=500)
+
         move_camera()
         p.stepSimulation()
+
+        body_pos[i] = p.getBasePositionAndOrientation(robot_id)[0]
+
         time.sleep(1 / 500)
 
     p.disconnect()
+
+    body_dist = get_distances(body_pos)
+    print(body_dist)
+
+    plt.plot(body_dist, 'b')
+
+    plt.title("Distance between Body and Starting Position")
+    plt.xlabel('Time')
+    plt.ylabel('Distance')
+
+    plt.show()
