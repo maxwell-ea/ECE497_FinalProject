@@ -13,7 +13,6 @@ from genalgs import Microbial
 
 import numpy as np
 import pandas as pd
-import time
 
 # Limits for body parameters
 body_w_lim = 5
@@ -75,9 +74,12 @@ def body_trial(num_bodies: int, generations: int, title: str, prob_reproduction 
         fitness[i] = distance[-1]
 
     ga = Microbial(bodies, fitness, prob_reproduction, prob_mutation, mutation_deviation, encoding_type, minimise)
+
+    error = (None, None)
     most_fit = ga.getMostFit()
 
-    time.sleep(0.01)
+    while most_fit == error:
+        most_fit = ga.getMostFit()
 
     # Create pandas dataframe to info related to fitness
     columns = ('Generation', 'Fitness', 'body_w', 'body_l', 'body_h', 'leg_w1', 'leg_w2', 'leg_w3', 'leg_w4', 'leg_l1',

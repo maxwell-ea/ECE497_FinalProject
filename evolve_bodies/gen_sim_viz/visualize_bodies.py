@@ -10,12 +10,13 @@ Last Modified: 11/20/2024
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from evolve_bodies.evolve_bodies import body_trial as bt
-from evolve_bodies import simulate_body_gui as sbg
+import body_trial as bt
+import simulate_body_gui as sbg
 
 
-def visualize_trial(trial_number:int):
-    filename = f"body_trial_{trial_number}.csv"
+def visualize_trial(trial_number: int):
+
+    filename = f"trial_bodies/body_trial_{trial_number}.csv"
     df = pd.read_csv(filename)
 
     fitness = np.array(df.Fitness)
@@ -27,17 +28,17 @@ def visualize_trial(trial_number:int):
     plt.show()
 
 
-def load_simulate_body(trial_number:int):
-    filename = f"body_trial_{trial_number}.csv"
+def load_simulate_body(trial_number: int):
+    filename = f"trial_bodies/body_trial_{trial_number}.csv"
     df = pd.read_csv(filename)
     last = np.array(df.loc[1000]['body_w':'legh_4'])
 
-    urdf = bt.generate_urdf(last)
+    urdf = bt.generate_urdf(last, trial_number)
     distance = sbg.simulate_body_gui(urdf)
 
     return distance
 
 
-def body_results(trial_number:int):
+def body_results(trial_number: int):
     visualize_trial(trial_number)
     load_simulate_body(trial_number)

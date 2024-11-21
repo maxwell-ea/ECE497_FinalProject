@@ -58,7 +58,7 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
     percent_complete = 0
 
     # Begin simulation loop
-    # print(f"Starting Simulation of {body}...")
+    #print(f"Starting Simulation of {body}...")
     for i in range(duration):
 
         # Set position of Leg 1
@@ -102,7 +102,7 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
 
     p.disconnect()
 
-    # print("Simulation Complete")
+    #print("Simulation Complete")
 
     body_dist = get_distances(body_pos)
     # print(f"Final Distance: {body_dist[-1]}")
