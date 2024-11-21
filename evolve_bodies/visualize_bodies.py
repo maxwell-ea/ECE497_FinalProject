@@ -10,8 +10,8 @@ Last Modified: 11/20/2024
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import body_trial as bt
-import simulate_body_gui as sbg
+from evolve_bodies.evolve_bodies import body_trial as bt
+from evolve_bodies import simulate_body_gui as sbg
 
 
 def visualize_trial(trial_number:int):

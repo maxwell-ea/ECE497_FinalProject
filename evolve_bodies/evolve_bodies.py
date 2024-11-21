@@ -7,7 +7,7 @@ evolve_bodies.py
 Last Modified: 11/20/2024
 """
 
-import body_trial as bt
+from evolve_bodies import body_trial as bt
 
 num_bodies = 20
 generations = 1000
