@@ -12,13 +12,13 @@ import driver_trial as dt
 num_drivers = 20
 body_num = 2
 generations = 1000
-trials = 5
+trials = 1
 
 for i in range(trials):
-    print(f"Starting trial {i}")
+    print(f"Starting trial {i+4}")
 
-    final_state = dt.driver_trial(num_drivers, 1, generations, f"{i}")
+    final_state = dt.driver_trial(num_drivers, body_num, generations, f"{i+4}")
 
-    print(f"Finished trial {i}")
+    print(f"Finished trial {i+4}")
 
 print("Evolve Driver Trials Complete")
