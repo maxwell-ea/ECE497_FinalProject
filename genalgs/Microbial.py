@@ -82,6 +82,7 @@ class Microbial(GeneticAlgorithm):
 
         self.mutation_deviation = mutation_deviation
         self.encoding_type = encoding_type
+        self.loser_index = -1
 
     def __str__(self):
         """ Custom method for string representation of the Microbial Genetic Algorithm
@@ -187,8 +188,9 @@ class Microbial(GeneticAlgorithm):
 
         self.population[replace] = loser
         self.replaced[replace] = 1
+        self.loser_index = replace
 
-        return replace
+        return self.loser_index
 
     def bit_mutate(self, index, verbosity: int = 0):
         """ With some probability prob_mutation, a random gene/bit will be flipped in the individual at the given
@@ -272,7 +274,7 @@ class Microbial(GeneticAlgorithm):
         if verbosity == 1:
             print(f"Evolved Individual at index {loser_index}: {self.population[loser_index]}\n")
 
-        print("Evolution Complete\n")
+        # print("Evolution Complete\n")
 
         # Return the new population and the list of which individuals (in this case only 1) were replaced
-        return self.population, self.replaced
+        return self.population, self.loser_index
