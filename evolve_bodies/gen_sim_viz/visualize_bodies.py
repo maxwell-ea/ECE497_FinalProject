@@ -10,7 +10,7 @@ Last Modified: 11/20/2024
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import body_trial as bt
+import evolve_bodies.gen_sim_viz.body_trial as bt
 import simulate_body_gui as sbg
 
 

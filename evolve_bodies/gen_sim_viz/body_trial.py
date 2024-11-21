@@ -7,7 +7,7 @@ body_trial.py
 Last Modified: 11/18/2024
 """
 
-import generate_body as gb
+import evolve_bodies.gen_sim_viz.generate_body as gb
 import simulate_body_nogui as sb
 from genalgs import Microbial
 

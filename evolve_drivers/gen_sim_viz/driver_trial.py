@@ -90,6 +90,6 @@ def driver_trial(num_drivers: int, body_num: int, generations: int, title: str, 
     best_body = ga.getMostFit()
     print(f"Best Fitness: {best_body[1]}, Body: {best_body[0]}")
 
-    df.to_csv(f'driver_trial_{title}.csv')
+    df.to_csv(f'body_2_drivers/driver_trial_{title}.csv')
 
     return drivers, fitness

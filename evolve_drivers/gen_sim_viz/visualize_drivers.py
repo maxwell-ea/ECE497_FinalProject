@@ -14,8 +14,7 @@ import simulate_body_gui as sbg
 
 
 def visualize_trial(trial_number: int, body_number: int):
-
-    filename = f"body_{body_number}_drivers/driver_trial_{trial_number}.csv"
+    filename = f"gen_sim_viz/body_{body_number}_drivers/driver_trial_{trial_number}.csv"
     df = pd.read_csv(filename)
 
     fitness = np.array(df.Fitness)
@@ -28,7 +27,7 @@ def visualize_trial(trial_number: int, body_number: int):
 
 
 def load_simulate_driver(trial_number: int, body_number: int):
-    filename = f"body_{body_number}_drivers/driver_trial_{trial_number}.csv"
+    filename = f"gen_sim_viz/body_{body_number}_drivers/driver_trial_{trial_number}.csv"
     df = pd.read_csv(filename)
     amp = list(df.loc[1000]['amp_1':'amp_4'])
     phase = list(df.loc[1000]['phase_1':'phase_4'])
@@ -56,7 +55,7 @@ def plot_drivers(num_trials: int, body_number: int):
     phase4 = []
 
     for i in range(num_trials):
-        filename = f"body_{body_number}_drivers/driver_trial_{i}.csv"
+        filename = f"gen_sim_viz/body_{body_number}_drivers/driver_trial_{i}.csv"
         df = pd.read_csv(filename)
         amp1.append(df.loc[1000]['amp_1'])
         amp2.append(df.loc[1000]['amp_2'])
