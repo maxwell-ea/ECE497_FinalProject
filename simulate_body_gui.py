@@ -70,15 +70,12 @@ def get_distances(positions):
     return distances
 
 
-def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offset=(0, 0, 0, 0)):
+def simulate_body_gui(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offset=(0, 0, 0, 0)):
     # Configuration
 
-    # For GUI version
-    # p.connect(p.GUI)
-    # p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
-
-    # For no GUI version (much faster)
-    p.connect(p.DIRECT)
+    # GUI version
+    p.connect(p.GUI)
+    p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
     p.setAdditionalSearchPath(pybullet_data.getDataPath())
     p.setGravity(0, 0, -9.8)
 
@@ -102,7 +99,8 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
     percent_complete = 0
 
     # Begin simulation loop
-    # print(f"Starting Simulation of {body}...")
+    print(f"Starting Simulation of {body}...")
+
     for i in range(duration):
 
         # Set position of Leg 1
@@ -133,8 +131,7 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
                                targetPosition=y_4[i],
                                maxForce=500)
 
-        # Uncomment when using GUI to move camera
-        # move_camera()
+        move_camera()
 
         # Next step in simulation
         p.stepSimulation()
@@ -147,22 +144,21 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
         #     percent_complete += 10
         #     print(f"{percent_complete}% Complete")
 
-        # Uncomment when using GUI for visualization
-        # time.sleep(1 / 500)
+        time.sleep(1 / 500)
+
+    print("Simulation Complete")
+
+    body_dist = get_distances(body_pos)
+    print(f"Final Distance: {body_dist[-1]}")
+
+    plt.plot(body_dist, 'b')
+
+    plt.title("Distance between Body and Starting Position")
+    plt.xlabel('Time')
+    plt.ylabel('Distance')
+
+    plt.show()
 
     p.disconnect()
 
-    # print("Simulation Complete")
-
-    body_dist = get_distances(body_pos)
-    # print(f"Final Distance: {body_dist[-1]}")
-    #
-    # plt.plot(body_dist, 'b')
-    #
-    # plt.title("Distance between Body and Starting Position")
-    # plt.xlabel('Time')
-    # plt.ylabel('Distance')
-    #
-    # plt.show()
-
-    return body_dist
+    return body_dist[-1]

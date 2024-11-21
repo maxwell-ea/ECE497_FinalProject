@@ -15,46 +15,6 @@ import math
 from matplotlib import pyplot as plt
 
 
-def move_camera():
-    """
-    Credit to Inwernos on Stack Overflow for the following code
-    Link: https://stackoverflow.com/questions/65987790/how-to-translate-camera-in-pybullet
-    """
-
-    keys = p.getKeyboardEvents()
-    cam = p.getDebugVisualizerCamera()
-
-    #Keys to change camera
-    if keys.get(108):  #L
-        xyz = cam[11]
-        x = float(xyz[0]) + 0.125
-        y = xyz[1]
-        z = xyz[2]
-        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
-                                     cameraTargetPosition=[x, y, z])
-    if keys.get(106):  #J
-        xyz = cam[11]
-        x = float(xyz[0]) - 0.125
-        y = xyz[1]
-        z = xyz[2]
-        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
-                                     cameraTargetPosition=[x, y, z])
-    if keys.get(105):  #I
-        xyz = cam[11]
-        x = xyz[0]
-        y = float(xyz[1]) + 0.125
-        z = xyz[2]
-        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
-                                     cameraTargetPosition=[x, y, z])
-    if keys.get(107):  #K
-        xyz = cam[11]
-        x = xyz[0]
-        y = float(xyz[1]) - 0.125
-        z = xyz[2]
-        p.resetDebugVisualizerCamera(cameraYaw=cam[8], cameraPitch=cam[9], cameraDistance=cam[10],
-                                     cameraTargetPosition=[x, y, z])
-
-
 def get_distances(positions):
     distances = [None] * len(positions)
 
@@ -73,11 +33,7 @@ def get_distances(positions):
 def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offset=(0, 0, 0, 0)):
     # Configuration
 
-    # For GUI version
-    # p.connect(p.GUI)
-    # p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
-
-    # For no GUI version (much faster)
+    # No GUI version (much faster)
     p.connect(p.DIRECT)
     p.setAdditionalSearchPath(pybullet_data.getDataPath())
     p.setGravity(0, 0, -9.8)
@@ -133,9 +89,6 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
                                targetPosition=y_4[i],
                                maxForce=500)
 
-        # Uncomment when using GUI to move camera
-        # move_camera()
-
         # Next step in simulation
         p.stepSimulation()
 
@@ -146,9 +99,6 @@ def simulate_body(body:str, duration=10000, amplitude=(1, -1, -1, 1), phase_offs
         # if i % ten_percent == 0:
         #     percent_complete += 10
         #     print(f"{percent_complete}% Complete")
-
-        # Uncomment when using GUI for visualization
-        # time.sleep(1 / 500)
 
     p.disconnect()
 
