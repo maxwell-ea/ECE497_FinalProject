@@ -2,7 +2,7 @@
 © 2024 Emily Maxwell <maxwelea@rose-hulman.edu>
 SPDX License: BSD-3-Clause
 
-simulate_body.py
+simulate_body_nogui.py
 
 Last Modified: 11/18/2024
 """

@@ -8,7 +8,7 @@
         <visual>
             <origin xyz="0 0 6.478859905709529" rpy="0 0 0"/>
             <geometry>
-                <box size="3.00553918342309 0.17536607627353484 4.616851974203088" />
+                <box size="3.155816142594244 0.17536607627353484 4.616851974203088" />
             </geometry>
             <material name="Cyan">
                 <color rgba="0 1.0 1.0 1.0"/>
@@ -17,14 +17,14 @@
         <collision>
             <origin xyz="0 0 6.478859905709529" rpy="0 0 0"/>
             <geometry>
-                <box size="3.00553918342309 0.17536607627353484 4.616851974203088" />
+                <box size="3.155816142594244 0.17536607627353484 4.616851974203088" />
             </geometry>
         </collision>
     </link>
     <joint name="Body_Leg1" type="revolute">
        <parent link="Body"/>
        <child  link="Leg1"/>
-       <origin rpy="0 0 0" xyz="-1.502769591711545 -0.08768303813676742 4.170433918607984" />
+       <origin rpy="0 0 0" xyz="-1.577908071297122 -0.08768303813676742 4.170433918607984" />
        <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
@@ -53,7 +53,7 @@
     <joint name="Body_Leg2" type="revolute">
        <parent link="Body"/>
        <child  link="Leg2"/>
-       <origin rpy="0 0 0" xyz="1.502769591711545 -0.08768303813676742 4.170433918607984" />
+       <origin rpy="0 0 0" xyz="1.577908071297122 -0.08768303813676742 4.170433918607984" />
        <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
@@ -82,7 +82,7 @@
     <joint name="Body_Leg3" type="revolute">
        <parent link="Body"/>
        <child  link="Leg3"/>
-       <origin rpy="0 0 0" xyz="1.502769591711545 0.08768303813676742 4.170433918607984" />
+       <origin rpy="0 0 0" xyz="1.577908071297122 0.08768303813676742 4.170433918607984" />
        <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
@@ -111,7 +111,7 @@
     <joint name="Body_Leg4" type="revolute">
        <parent link="Body"/>
        <child  link="Leg4"/>
-       <origin rpy="0 0 0" xyz="-1.502769591711545 0.08768303813676742 4.170433918607984" />
+       <origin rpy="0 0 0" xyz="-1.577908071297122 0.08768303813676742 4.170433918607984" />
        <axis xyz="0 1 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>

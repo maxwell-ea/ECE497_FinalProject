@@ -8,7 +8,7 @@ Last Modified: 11/18/2024
 """
 
 import generate_body as gb
-import simulate_body as sb
+import simulate_body_nogui as sb
 from genalgs import Microbial
 
 import numpy as np
